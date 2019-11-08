@@ -17,6 +17,7 @@ const booksRouter = require('./routes/book');
 
 const app = express();
 
+app.set('trust proxy', true);
 app.use(cors);
 app.options('*', cors);
 app.use(logger('dev'));
@@ -34,8 +35,8 @@ app.use(
     secret: process.env.SECRET,
     resave: true,
     saveUninitialized: true,
+    name: 'books-ih',
     cookie: {
-      name: 'books-ih',
       maxAge: 24 * 60 * 60 * 1000,
       sameSite: 'none',
       secure: process.env.NODE_ENV === 'production',
